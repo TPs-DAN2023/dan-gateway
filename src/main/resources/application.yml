@@ -1,0 +1,24 @@
+spring:
+    cloud:
+        gateway:
+            routes:
+                - id: usuarios
+                  uri: http://ms-usuarios:8080
+                  predicates:
+                    - Path=/api/usuarios/**
+                  filters:
+                    - RewritePath=/api/usuarios?(?<segment>.*), /api/usuario$\{segment}
+                
+                - id: productos
+                  uri: http://ms-productos:3000
+                  predicates:
+                    - Path=/api/productos/**
+                  filters:
+                    - RewritePath=/api/productos/?(?<segment>.*), /api/productos/$\{segment}
+                
+                - id: pedidos
+                  uri: http://ms-pedidos:8083
+                  predicates:
+                    - Path=/api/pedidos/**
+                  filters:
+                    - RewritePath=/api/pedidos?(?<segment>.*), /api/pedidos$\{segment}
