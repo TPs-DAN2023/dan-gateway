@@ -8,6 +8,12 @@ spring:
                     - Path=/api/usuarios/**
                   filters:
                     - RewritePath=/api/usuarios?(?<segment>.*), /api/usuario$\{segment}
+                    - AuthFilter
+                
+                - id: auth
+                  uri: http://ms-usuarios:8080
+                  predicates:
+                    - Path=/api/auth/**
                 
                 - id: productos
                   uri: http://ms-productos:3000
@@ -15,6 +21,7 @@ spring:
                     - Path=/api/productos/**
                   filters:
                     - RewritePath=/api/productos/?(?<segment>.*), /api/productos/$\{segment}
+                    - AuthFilter
                 
                 - id: pedidos
                   uri: http://ms-pedidos:8083
@@ -22,3 +29,4 @@ spring:
                     - Path=/api/pedidos/**
                   filters:
                     - RewritePath=/api/pedidos?(?<segment>.*), /api/pedidos$\{segment}
+                    - AuthFilter
