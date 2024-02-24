@@ -1,32 +1,56 @@
 spring:
-    cloud:
-        gateway:
-            routes:
-                - id: usuarios
-                  uri: http://ms-usuarios:8080
-                  predicates:
-                    - Path=/api/usuarios/**
-                  filters:
-                    - RewritePath=/api/usuarios?(?<segment>.*), /api/usuario$\{segment}
-                    - AuthFilter
-                
-                - id: auth
-                  uri: http://ms-usuarios:8080
-                  predicates:
-                    - Path=/api/auth/**
-                
-                - id: productos
-                  uri: http://ms-productos:3000
-                  predicates:
-                    - Path=/api/productos/**
-                  filters:
-                    - RewritePath=/api/productos/?(?<segment>.*), /api/productos/$\{segment}
-                    - AuthFilter
-                
-                - id: pedidos
-                  uri: http://ms-pedidos:8083
-                  predicates:
-                    - Path=/api/pedidos/**
-                  filters:
-                    - RewritePath=/api/pedidos?(?<segment>.*), /api/pedidos$\{segment}
-                    - AuthFilter
+  cloud:
+    gateway:
+      routes:
+        - id: usuarios
+          uri: http://ms-usuarios:8080
+          predicates:
+            - Path=/api/usuarios/**
+          filters:
+            - RewritePath=/api/usuarios?(?<segment>.*), /api/usuario$\{segment}
+            - AuthFilter
+
+        - id: auth
+          uri: http://ms-usuarios:8080
+          predicates:
+            - Path=/api/auth/**
+
+        - id: productos
+          uri: http://ms-productos:3000
+          predicates:
+            - Path=/api/productos/**
+          filters:
+            - RewritePath=/api/productos/?(?<segment>.*), /api/productos/$\{segment}
+            - AuthFilter
+
+        - id: pedidos
+          uri: http://ms-pedidos:8083
+          predicates:
+            - Path=/api/pedidos/**
+          filters:
+            - RewritePath=/api/pedidos?(?<segment>.*), /api/pedidos$\{segment}
+            - AuthFilter
+
+        - id: categorias
+          uri: http://ms-productos:3000
+          predicates:
+            - Path=/api/categorias/**
+          filters:
+            - RewritePath=/api/categorias/?(?<segment>.*), /api/categorias/$\{segment}
+            - AuthFilter
+
+        - id: proveedores
+          uri: http://ms-productos:3000
+          predicates:
+            - Path=/api/proveedores/**
+          filters:
+            - RewritePath=/api/proveedores/?(?<segment>.*), /api/proveedores/$\{segment}
+            - AuthFilter
+
+        - id: tipo-usuario
+          uri: http://ms-usuarios:8080
+          predicates:
+            - Path=/api/tipo-usuario/**
+          filters:
+            - RewritePath=/api/tipo-usuario/?(?<segment>.*), /api/tipo-usuario/$\{segment}
+            - AuthFilter
