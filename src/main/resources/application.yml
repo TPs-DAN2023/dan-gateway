@@ -5,7 +5,9 @@ spring:
         add-to-simple-url-handler-mapping: true
         corsConfigurations:
           "[/**]":
-            allowedOrigins: "http://localhost:3000"
+            allowedOrigins:
+              - "http://localhost:3000"
+              - "http://localhost:80"
             allowedMethods: "*"
             allowedHeaders: "*"
             allowCredentials: true
@@ -55,10 +57,10 @@ spring:
             - RewritePath=/api/proveedores/?(?<segment>.*), /api/proveedores/$\{segment}
             - AuthFilter
 
-        - id: tipo-usuario
+        - id: tipos-usuario
           uri: http://ms-usuarios:8080
           predicates:
-            - Path=/api/tipo-usuario/**
+            - Path=/api/tipos-usuario/**
           filters:
-            - RewritePath=/api/tipo-usuario/?(?<segment>.*), /api/tipo-usuario/$\{segment}
+            - RewritePath=/api/tipos-usuario?(?<segment>.*), /api/tipo-usuario$\{segment}
             - AuthFilter
