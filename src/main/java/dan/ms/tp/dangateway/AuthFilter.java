@@ -8,7 +8,6 @@ import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -31,11 +30,6 @@ public class AuthFilter extends AbstractGatewayFilterFactory<AuthFilter.Config> 
   @Override
   public GatewayFilter apply(Config config) {
     return (exchange, chain) -> {
-
-      // Allow OPTIONS requests without authentication
-      if (exchange.getRequest().getMethod() == HttpMethod.OPTIONS) {
-        return chain.filter(exchange);
-      }
 
       // continues
       if (isPublic.test(exchange.getRequest()))
