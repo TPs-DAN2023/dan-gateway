@@ -8,6 +8,7 @@ spring:
             - Path=/api/usuarios/**
           filters:
             - RewritePath=/api/usuarios/health, /api/health
+            - RewritePath=/api/usuarios/metrics, /actuator/prometheus
             - RewritePath=/api/usuarios/tipos?(?<segment>.*), /api/tipo-usuario$\{segment}
             - RewritePath=/api/usuarios?(?<segment>.*), /api/usuario$\{segment}
             - AuthFilter
@@ -23,6 +24,7 @@ spring:
             - Path=/api/productos/**
           filters:
             - RewritePath=/api/productos/health, /api/health
+            - RewritePath=/api/productos/metrics, /metrics
             - RewritePath=/api/productos/categorias/?(?<segment>.*), /api/categorias/$\{segment}
             - RewritePath=/api/productos/proveedores/?(?<segment>.*), /api/proveedores/$\{segment}
             - RewritePath=/api/productos/?(?<segment>.*), /api/productos/$\{segment}
@@ -34,5 +36,6 @@ spring:
             - Path=/api/pedidos/**
           filters:
             - RewritePath=/api/pedidos/health, /api/health
+            - RewritePath=/api/pedidos/metrics, /actuator/prometheus
             - RewritePath=/api/pedidos?(?<segment>.*), /api/pedidos$\{segment}
             - AuthFilter
