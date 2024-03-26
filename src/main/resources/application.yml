@@ -41,12 +41,12 @@ spring:
             - AuthFilter
 
         - id: ofertas
-        - uri: lb://MS-OFERTAS
+          uri: lb://MS-OFERTAS-PRECIOS
           predicates:
             - Path=/api/ofertas/**
           filters:
-            - RewritePath=/api/ofertas/health, /api/ofertas-precios/health
+            - RewritePath=/api/ofertas/health, /api/health
             - RewritePath=/api/ofertas/metrics, /actuator/prometheus
-            - RewritePath=/api/ofertas/precios?(?<segment>.*), /api/ofertas-precios/precios$\{segment}
-            - RewritePath=/api/ofertas?(?<segment>.*), /api/ofertas-precios$\{segment}
+            - RewritePath=/api/ofertas/precios/?(?<segment>.*), /api/precios/$\{segment}
+            - RewritePath=/api/ofertas?(?<segment>.*), /api/ofertas$\{segment}
             - AuthFilter
